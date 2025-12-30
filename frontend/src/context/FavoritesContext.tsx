@@ -19,7 +19,6 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
 
     const fetchFavorites = async () => {
         try {
-            // Fetch large batch for checking 'isFavorite' globally
             const data = await movieService.getFavorites(1, 1000);
             setFavorites(data.result);
         } catch (error) {
@@ -34,16 +33,13 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const addFavorite = async (movie: Movie) => {
-        // Optimistic update
         const previousFavorites = [...favorites];
         setFavorites((prev) => [...prev, movie]);
 
         try {
             await movieService.addFavorite(movie.imdbID);
-            // Sync with backend to ensure data consistency
             await fetchFavorites();
         } catch (error) {
-            // Revert on error
             setFavorites(previousFavorites);
             console.error("Failed to add favorite", error);
         }
@@ -51,13 +47,11 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
 
     const removeFavorite = async (movieId: string | number) => {
         const idStr = movieId.toString();
-        // Optimistic update
         const previousFavorites = [...favorites];
         setFavorites((prev) => prev.filter(m => m.imdbID !== idStr));
 
         try {
             await movieService.removeFavorite(idStr);
-            // Sync with backend to ensure data consistency
             await fetchFavorites();
         } catch (error) {
             setFavorites(previousFavorites);

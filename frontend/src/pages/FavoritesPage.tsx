@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFavorites } from '@/context/FavoritesContext';
 import { movieService } from '@/services/movie.service';
 import { MovieCard } from '@/components/feature/MovieCard';
@@ -138,7 +138,7 @@ export function FavoritesPage() {
                     <AlertDialogHeader>
                         <AlertDialogTitle className="text-white">Remove from favorites?</AlertDialogTitle>
                         <AlertDialogDescription className="text-gray-400">
-                            Are you sure you want to remove "{movieToRemove?.Title}" from your favorites? 
+                            Are you sure you want to remove "{movieToRemove?.title}" from your favorites? 
                             This action cannot be undone.
                         </AlertDialogDescription>
                     </AlertDialogHeader>

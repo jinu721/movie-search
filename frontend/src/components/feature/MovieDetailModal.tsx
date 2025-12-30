@@ -1,8 +1,7 @@
-import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Star, Calendar, Clock, Globe, Award } from 'lucide-react';
+import { Star, Calendar, Clock, Award } from 'lucide-react';
 import type { MovieDetails } from '@/types';
 
 interface MovieDetailModalProps {

@@ -30,9 +30,6 @@ export class App {
 
         this.app.use('/api/movies', this.movieRouter.router);
 
-        this.app.get('/health', (_req, res) => {
-            res.status(200).json({ status: 'ok', timestamp: new Date() });
-        });
 
         this.app.use((_req, res) => {
             res.status(404).json({

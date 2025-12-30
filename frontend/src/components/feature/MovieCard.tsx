@@ -29,7 +29,6 @@ export function MovieCard({ movie, isFavorite, onToggleFavorite, onView }: Movie
                     onError={() => setImgSrc('https://via.placeholder.com/500x750?text=No+Image')}
                 />
 
-                {/* Overlay actions */}
                 <div className="absolute top-2 right-2 z-10">
                     <Button
                         variant="secondary"

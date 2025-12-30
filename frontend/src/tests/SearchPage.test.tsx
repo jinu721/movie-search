@@ -1,12 +1,10 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { vi, describe, it, expect } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { SearchPage } from '../pages/SearchPage';
 import { movieService } from '../services/movie.service';
 import { BrowserRouter } from 'react-router-dom';
 import * as FavoritesContextModule from '../context/FavoritesContext';
 
-// Mock movieService
 vi.mock('../services/movie.service', () => ({
     movieService: {
         searchMovies: vi.fn(),
@@ -14,7 +12,6 @@ vi.mock('../services/movie.service', () => ({
     }
 }));
 
-// Mock useFavorites
 vi.mock('../context/FavoritesContext', () => ({
     useFavorites: vi.fn(),
     FavoritesProvider: ({ children }: any) => <div>{children}</div>

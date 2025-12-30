@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { movieService } from '@/services/movie.service';
 import { MovieCard } from '@/components/feature/MovieCard';
@@ -37,7 +37,6 @@ export function SearchPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Modal state
     const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,7 +51,6 @@ export function SearchPage() {
                 return;
             }
 
-            // Update URL
             setSearchParams({ query: debouncedQuery, page: page.toString() }, { replace: true });
 
             setIsLoading(true);
@@ -61,8 +59,6 @@ export function SearchPage() {
             try {
                 const data = await movieService.searchMovies(debouncedQuery, page);
                 setMovies(data.result);
-                // OMDB returns totalResults, not totalPages usually directly in "Search" array but our backend maps it.
-                // Backend: totalPages = ceil(totalResults / 10).
                 setTotalPages(data.pagination.totalPages);
             } catch (err) {
                 console.error(err);
@@ -76,7 +72,6 @@ export function SearchPage() {
         fetchMovies();
     }, [debouncedQuery, page, setSearchParams]);
 
-    // Reset page when query changes
     useEffect(() => {
         setPage(1);
     }, [debouncedQuery]);
@@ -96,9 +91,6 @@ export function SearchPage() {
 
     const handleView = async (movie: Movie) => {
         try {
-            // Optimistically open modal with summary data if needed, or wait for full load
-            // For better UX, we fetch then open, or open with loading state.
-            // Let's fetch then open for simplicity as we need MovieDetails type
             const details = await movieService.getMovie(movie.imdbID);
             setSelectedMovie(details);
             setIsModalOpen(true);
