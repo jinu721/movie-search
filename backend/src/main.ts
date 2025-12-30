@@ -1,4 +1,4 @@
-import "@config/env"; 
-import { bootstrap } from "bootstrap";
+import "@config/env";
+import { bootstrap } from "./bootstrap";
 
 bootstrap();
