@@ -7,5 +7,5 @@ export interface IMovieService {
     getMovieById(imdbId: string): Promise<MovieResponseDTO | null>;
     addFavourite(userId: string, movieId: string): Promise<Favourite>;
     removeFavourite(userId: string, movieId: string): Promise<void>;
-    getFavourites(userId: string): Promise<Favourite[]>;
+    getFavourites(userId: string, page: number, limit: number): Promise<PaginatedResponse<Favourite>>;
 }

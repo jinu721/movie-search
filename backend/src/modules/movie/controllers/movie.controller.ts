@@ -9,8 +9,6 @@ import { HttpStatus, Messages } from '@shared/constants';
 @injectable()
 export class MovieController {
     constructor(
-        // @ts-ignore - Ignoring unused injection warning if any specific linter complains, 
-        // but proper DI should handle it.
         @inject(TYPES.MovieService) private movieService: IMovieService
     ) { }
 
@@ -42,7 +40,6 @@ export class MovieController {
 
     addFavourite = asyncHandler(async (req: Request, res: Response): Promise<void> => {
         const { movieId } = req.body;
-        // Use a static/global dummy user ID since auth is removed
         const userId = "global_user";
 
         if (!movieId) {
